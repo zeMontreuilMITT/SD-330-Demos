@@ -22,7 +22,10 @@ namespace SD_330_Demos.Controllers
         // GET: Addresses
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Address.ToListAsync());
+            List<Address> addresses = await _context.Address.ToListAsync();
+
+
+            return View(addresses);
         }
 
         // GET: Addresses/Details/5

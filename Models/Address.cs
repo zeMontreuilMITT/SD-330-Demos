@@ -9,5 +9,19 @@
         public string StateProvince { get; set; }
         public string CountryRegion { get; set; }
         public virtual HashSet<CustomerAddress> CustomerAddresses { get; set; } = new HashSet<CustomerAddress>();
+
+        public Address(string line1, string? line2, string city, string stateProvice, string countryRegion)
+        {
+            AddressLine1 = line1;
+            AddressLine2 = line2;
+            City = city;
+            StateProvince = stateProvice;
+            CountryRegion = countryRegion;
+        }
+
+        public Address()
+        {
+
+        }
     }
 }
