@@ -7,6 +7,7 @@
         public string LastName { get; set; }
         public string? CompanyName { get; set; }
         public string? Phone { get; set; }
-        public virtual HashSet<Address> Addresses { get; set; } = new HashSet<Address>();
+        public virtual HashSet<CustomerAddress> CustomerAddresses { get; set; } = new HashSet<CustomerAddress>();
+
     }
 }

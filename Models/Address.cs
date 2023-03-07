@@ -8,6 +8,6 @@
         public string City { get; set; }
         public string StateProvince { get; set; }
         public string CountryRegion { get; set; }
-        public virtual HashSet<Customer> Customers { get; set; } = new HashSet<Customer?>();
+        public virtual HashSet<CustomerAddress> CustomerAddresses { get; set; } = new HashSet<CustomerAddress>();
     }
 }
