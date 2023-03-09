@@ -5,13 +5,23 @@
 namespace SD_330_Demos.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCustomerAddress : Migration
+    public partial class AddCustomerAddressBreak : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "AddressCustomer");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "CompanyName",
+                table: "Customer",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
 
             migrationBuilder.CreateTable(
                 name: "CustomerAddress",
@@ -56,6 +66,14 @@ namespace SD_330_Demos.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CustomerAddress");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "CompanyName",
+                table: "Customer",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
 
             migrationBuilder.CreateTable(
                 name: "AddressCustomer",

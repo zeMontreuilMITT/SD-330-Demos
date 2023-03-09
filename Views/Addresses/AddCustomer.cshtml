@@ -1,0 +1,13 @@
+﻿@using SD_330_Demos.Models.ViewModels;
+@model AddressAddCustomerViewModel
+
+<h3>Add Customer to Address</h3>
+<form method="post" asp-action="AddCustomer">
+    <select asp-for="CustomerId" asp-items="@Model.Customers"></select>
+    <select asp-for="AddressId" asp-items="@Model.Addresses"></select>
+    <button type="submit">Add</button>
+</form>
+
+<div>
+    @Model.ViewMessage
+</div>

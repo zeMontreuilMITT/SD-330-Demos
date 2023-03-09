@@ -11,8 +11,8 @@ using SD_330_Demos.Data;
 namespace SD_330_Demos.Migrations
 {
     [DbContext(typeof(DemosContext))]
-    [Migration("20230306193859_AddCustomerAddress")]
-    partial class AddCustomerAddress
+    [Migration("20230309164010_AddCustomerAddressBreak")]
+    partial class AddCustomerAddressBreak
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,6 +65,7 @@ namespace SD_330_Demos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CompanyName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")

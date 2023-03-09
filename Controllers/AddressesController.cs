@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SD_330_Demos.Models;
 using SD_330_Demos.Data;
+using SD_330_Demos.Models.ViewModels;
 
 namespace SD_330_Demos.Controllers
 {
     public class AddressesController : Controller
     {
         private readonly DemosContext _context;
-
         public AddressesController(DemosContext context)
         {
             _context = context;
@@ -22,7 +22,59 @@ namespace SD_330_Demos.Controllers
         // GET: Addresses
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Address.ToListAsync());
+              return View(await _context.Address
+                  .Include(a => a.CustomerAddresses)
+                  .ThenInclude(ca => ca.Customer)
+                  .ToListAsync());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddCustomer()
+        {
+            // need dropdown of all Addresses and all Customers
+
+            AddressAddCustomerViewModel vm = new AddressAddCustomerViewModel(_context.Customer.ToList(), _context.Address.ToList());
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCustomer(AddressAddCustomerViewModel vm)
+        {
+            if(vm.CustomerId != null && vm.AddressId != null)
+            {
+                // get customer and address, then add new CA
+                //1: query customer and address
+                // ensure customer not already registered for address
+                if (!_context.CustomerAddress.Any(ca => ca.AddressId == vm.AddressId && ca.CustomerId == vm.CustomerId
+                ))
+                {
+                    CustomerAddress customerAddress = new CustomerAddress();
+
+                    Customer customer = _context.Customer.First(c => c.Id == vm.CustomerId);
+                    Address address = _context.Address.First(a => a.Id == vm.AddressId);
+
+                    customerAddress.Address = address;
+                    customerAddress.Customer = customer;
+
+                    _context.CustomerAddress.Add(customerAddress);
+                    _context.SaveChanges();
+
+                    vm.ViewMessage = $"Succesfully added {customer.FirstName} {customer.LastName} to {address.AddressLine1}";
+
+                } else
+                {
+                    vm.ViewMessage = "Selected Customer already registered to Selected Address.";
+                }
+
+                vm.PopulateLists(_context.Customer.ToList(), _context.Address.ToList());
+
+                return View(vm);
+            }
+            else
+            {
+                throw new Exception("Error retreiving Customer/Address Id");
+            }
         }
 
         // GET: Addresses/Details/5
