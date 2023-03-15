@@ -9,6 +9,15 @@ using SD_330_Demos.Models;
 using SD_330_Demos.Data;
 using SD_330_Demos.Models.ViewModels;
 
+
+// CLIENT SIDE
+// Client: user
+// The "consumer" side of the application
+// EX: Views
+
+// SERVER SIDE
+// "Delivering" side of the application
+
 namespace SD_330_Demos.Controllers
 {
     public class AddressesController : Controller
@@ -109,7 +118,7 @@ namespace SD_330_Demos.Controllers
         public async Task<IActionResult> Create([Bind("Id,AddressLine1,AddressLine2,City,StateProvince,CountryRegion")] Address address)
         {
             if (ModelState.IsValid)
-            {
+            {   
                 _context.Add(address);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

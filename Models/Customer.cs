@@ -1,4 +1,6 @@
-﻿namespace SD_330_Demos.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SD_330_Demos.Models
 {
     public class Customer
     {
@@ -7,6 +9,7 @@
         public string LastName { get; set; }
         public string CompanyName { get; set; }
         public string? Phone { get; set; }
+        public int YearsActive { get; set; }
         public virtual HashSet<CustomerAddress> CustomerAddresses{ get; set; } = new HashSet<CustomerAddress>();
 
         public Customer()
