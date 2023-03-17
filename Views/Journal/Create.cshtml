@@ -1,0 +1,24 @@
+﻿@model SD_330_Demos.Models.Journal
+
+<h1>Create Journal</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="create" method="post">
+            <div class="form-group">
+                <input asp-for="Body" class="form-control" />
+                <span asp-validation-for="Body" class="alert-warning"></span>
+            </div>
+                <input asp-for="BlogNumber" value="@ViewBag.blogId" type="hidden" />
+            <div>
+                <input type="submit" value="Add New Journal" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

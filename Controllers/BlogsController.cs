@@ -36,7 +36,7 @@ namespace SD_330_Demos.Controllers
             }
 
             var blog = await _context.Blog
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.BlogNumber == id);
             if (blog == null)
             {
                 return NotFound();
@@ -57,7 +57,7 @@ namespace SD_330_Demos.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description")] Blog blog)
-        {
+        { 
             if (ModelState.IsValid)
             {
                 _context.Add(blog);
@@ -90,7 +90,7 @@ namespace SD_330_Demos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description")] Blog blog)
         {
-            if (id != blog.Id)
+            if (id != blog.BlogNumber)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace SD_330_Demos.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BlogExists(blog.Id))
+                    if (!BlogExists(blog.BlogNumber))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace SD_330_Demos.Controllers
             }
 
             var blog = await _context.Blog
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.BlogNumber == id);
             if (blog == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace SD_330_Demos.Controllers
 
         private bool BlogExists(int id)
         {
-          return (_context.Blog?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Blog?.Any(e => e.BlogNumber == id)).GetValueOrDefault();
         }
     }
 }
