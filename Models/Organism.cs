@@ -1,8 +1,12 @@
-﻿namespace SD_330_Demos.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SD_330_Demos.Models
 {
     public abstract class Organism
     {
         public int Id { get; set; }
+        [Required]
+        [MaxLength(100)]
         public string BinomialName { get; set; }
         public string EnglishName { get; set; }
         public int AgeDays { get; set; }
@@ -11,21 +15,18 @@
 
         public HashSet<Diet> Diets { get; set; } = new HashSet<Diet>();
 
-
-        public Organism(string binomial, string english)
+        public Organism()
         {
-            BinomialName= binomial;
-            EnglishName= english;
+
         }
     }
 
     public class Animal: Organism
     {
-
-        // Animal cat = new Animal("Felis Catus", "Cat", 4);
-
         public int Legs { get; set; }
 
+        [MaxLength(50)]
+        public string Habitat { get; set; }
     }
 
     public class Plant :Organism

@@ -18,11 +18,6 @@ namespace SD_330_Demos.Controllers
 
         public IActionResult Index()
         {
-            Animal newAnimal = new Animal();
-            Plant newPlant = new Plant();
-
-            _context.Plant.Add(newPlant);
-            _context.Animal.Add(newAnimal);
             return View();
         }
 

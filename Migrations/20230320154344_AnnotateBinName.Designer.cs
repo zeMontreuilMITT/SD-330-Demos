@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SD_330_Demos.Data;
 
@@ -10,9 +11,10 @@ using SD_330_Demos.Data;
 namespace SD_330_Demos.Migrations
 {
     [DbContext(typeof(SD_330_DemosContext))]
-    partial class SD_330_DemosContextModelSnapshot : ModelSnapshot
+    [Migration("20230320154344_AnnotateBinName")]
+    partial class AnnotateBinName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,11 +104,6 @@ namespace SD_330_Demos.Migrations
             modelBuilder.Entity("SD_330_Demos.Models.Animal", b =>
                 {
                     b.HasBaseType("SD_330_Demos.Models.Organism");
-
-                    b.Property<string>("Habitat")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Legs")
                         .HasColumnType("int");
